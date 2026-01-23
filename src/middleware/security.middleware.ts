@@ -44,7 +44,7 @@ export const httpsRedirect = (
       return res.redirect(301, `https://${req.get('host')}${req.url}`);
     }
   }
-  next();
+  return next();
 };
 
 // IP Whitelist for admin endpoints
@@ -73,7 +73,7 @@ export const ipWhitelist = (
     });
   }
   
-  next();
+  return next();
 };
 
 // Request ID for tracing
@@ -85,7 +85,7 @@ export const requestId = (
   const id = crypto.randomBytes(16).toString('hex');
   (req as any).requestId = id;
   res.setHeader('X-Request-ID', id);
-  next();
+  return next();
 };
 
 // CORS configuration
@@ -137,7 +137,7 @@ export const preventParameterPollution = (
     });
   }
   
-  next();
+  return next();
 };
 
 // Content type validation
@@ -162,7 +162,7 @@ export const validateContentType = (
     }
   }
   
-  next();
+  return next();
 };
 
 // Request size limiter
@@ -186,5 +186,5 @@ export const requestSizeLimiter = (
     });
   }
   
-  next();
+  return next();
 };

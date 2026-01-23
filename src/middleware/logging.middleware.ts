@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import { logger } from '../utils/logger';
 import { AuthRequest } from './auth.middleware';
 
@@ -43,12 +43,11 @@ export const requestLogger = (
     }
   });
   
-  next();
+  return next();
 };
 
 export const sensitiveDataLogger = (
   req: AuthRequest,
-  res: Response,
   next: NextFunction
 ) => {
   // Log sensitive operations
@@ -65,5 +64,5 @@ export const sensitiveDataLogger = (
     });
   }
   
-  next();
+  return next();
 };

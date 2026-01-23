@@ -47,6 +47,14 @@ export const authenticate = async (
     
     try {
       const decoded = jwt.verify(token, config.jwt.secret) as AuthRequest['user'];
+      
+      if (!decoded) {
+        return res.status(401).json({ 
+          error: 'Authentication required',
+          message: 'Invalid token' 
+        });
+      }
+      
       req.user = decoded;
       
       logger.info('User authenticated', {
@@ -55,7 +63,7 @@ export const authenticate = async (
         ip: req.ip
       });
       
-      next();
+      return next();
     } catch (err: any) {
       if (err.name === 'TokenExpiredError') {
         logger.warn('Authentication failed: Token expired', {
@@ -117,7 +125,7 @@ export const requireAdmin = (
     });
   }
   
-  next();
+  return next();
 };
 
 export const authorizeUser = (
@@ -147,7 +155,7 @@ export const authorizeUser = (
     });
   }
   
-  next();
+  return next();
 };
 
 export const generateToken = (user: {
@@ -161,9 +169,9 @@ export const generateToken = (user: {
       email: user.email,
       role: user.role
     },
-    config.jwt.secret,
+    config.jwt.secret as string,
     { 
-      expiresIn: config.jwt.expiresIn,
+      expiresIn: config.jwt.expiresIn as any,
       issuer: 'hd-wallet-api',
       audience: 'hd-wallet-client'
     }
@@ -188,7 +196,7 @@ export const refreshToken = (
   });
   
   res.setHeader('X-New-Token', newToken);
-  next();
+  return next();
 };
 
 

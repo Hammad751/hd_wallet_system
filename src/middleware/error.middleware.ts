@@ -80,7 +80,7 @@ export class InternalServerError extends Error {
 export const notFoundHandler = (
   req: Request,
   res: Response,
-  next: NextFunction
+  // next: NextFunction
 ) => {
   logger.warn('Route not found', {
     method: req.method,
@@ -99,7 +99,7 @@ export const errorHandler = (
   err: AppError,
   req: Request,
   res: Response,
-  next: NextFunction
+  // next: NextFunction
 ) => {
   const statusCode = err.statusCode || 500;
   const isOperational = err.isOperational || false;

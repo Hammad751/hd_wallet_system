@@ -30,12 +30,12 @@ export class TransferController {
         token
       });
       
-      res.json({
+      return res.json({
         success: true,
         data: { txHash }
       });
     } catch (error: any) {
-      res.status(500).json({ 
+      return res.status(500).json({ 
         error: error.message 
       });
     }
@@ -51,12 +51,12 @@ export class TransferController {
         chain as string
       );
       
-      res.json({
+      return res.json({
         success: true,
         data: transaction
       });
     } catch (error: any) {
-      res.status(500).json({ 
+      return res.status(500).json({ 
         error: error.message 
       });
     }
@@ -79,12 +79,12 @@ export class TransferController {
         token
       });
       
-      res.json({
+      return res.json({
         success: true,
         data: { txHashes, count: txHashes.length }
       });
     } catch (error: any) {
-      res.status(500).json({ 
+      return res.status(500).json({ 
         error: error.message 
       });
     }

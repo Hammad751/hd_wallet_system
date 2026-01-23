@@ -1,5 +1,5 @@
 
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import { query } from '../config/database';
 import { logger } from '../utils/logger';
 import { AuthRequest } from './auth.middleware';
@@ -57,9 +57,9 @@ export const checkDailyLimit = async (
       });
     }
     
-    next();
+    return next();
   } catch (error: any) {
     logger.error('Error checking daily limit', error);
-    next(error);
+    return next(error);
   }
 };

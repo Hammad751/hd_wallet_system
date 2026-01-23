@@ -6,6 +6,21 @@ export * from './error.middleware';
 export * from './transaction.middleware';
 export * from './logging.middleware';
 
+import { query } from '../config/database';
+import { logger } from '../utils/logger';
+
+import { Request, Response, NextFunction } from 'express';
+// If you have a types directory, create 'auth.d.ts' with the following content:
+// export interface AuthRequest extends Request {
+//   user?: { id: string; role: string };
+// }
+
+// Or update the import path to the correct location, for example:
+// Define AuthRequest interface locally if not available externally
+export interface AuthRequest extends Request {
+  user?: { id: string; role: string };
+}
+
 // Large transfer approval requirement
 const APPROVAL_THRESHOLD = 100; // Transfers over 100 units require approval
 
@@ -62,17 +77,17 @@ export const checkApprovalRequired = async (
       }
     }
     
-    next();
+    return next();
   } catch (error: any) {
     logger.error('Error checking approval requirement', error);
-    next(error);
+    return next(error);
   }
 };
 
 // Suspicious activity detection
 export const detectSuspiciousActivity = async (
   req: AuthRequest,
-  res: Response,
+  
   next: NextFunction
 ) => {
   try {
@@ -142,9 +157,9 @@ export const detectSuspiciousActivity = async (
       );
     }
     
-    next();
+    return next();
   } catch (error: any) {
     logger.error('Error detecting suspicious activity', error);
-    next(error);
+    return next(error);
   }
 };

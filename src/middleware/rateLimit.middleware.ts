@@ -28,7 +28,7 @@ export const apiLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   store: redisClient ? new RedisStore({
-    client: redisClient,
+    sendCommand: (...args: string[]) => redisClient!.sendCommand(args),
     prefix: 'rl:api:'
   }) : undefined,
   handler: (req, res) => {
@@ -54,7 +54,7 @@ export const walletCreationLimiter = rateLimit({
   },
   skipSuccessfulRequests: false,
   store: redisClient ? new RedisStore({
-    client: redisClient,
+    sendCommand: (...args: string[]) => redisClient!.sendCommand(args),
     prefix: 'rl:wallet:'
   }) : undefined,
   handler: (req, res) => {
@@ -78,7 +78,7 @@ export const transferLimiter = rateLimit({
     message: 'Please try again later'
   },
   store: redisClient ? new RedisStore({
-    client: redisClient,
+    sendCommand: (...args: string[]) => redisClient!.sendCommand(args),
     prefix: 'rl:transfer:'
   }) : undefined,
   handler: (req, res) => {
@@ -102,7 +102,7 @@ export const addressLimiter = rateLimit({
     message: 'Please try again later'
   },
   store: redisClient ? new RedisStore({
-    client: redisClient,
+    sendCommand: (...args: string[]) => redisClient!.sendCommand(args),
     prefix: 'rl:address:'
   }) : undefined,
   handler: (req, res) => {
@@ -126,7 +126,7 @@ export const flushLimiter = rateLimit({
     message: 'Please try again later'
   },
   store: redisClient ? new RedisStore({
-    client: redisClient,
+    sendCommand: (...args: string[]) => redisClient!.sendCommand(args),
     prefix: 'rl:flush:'
   }) : undefined,
   handler: (req, res) => {
@@ -151,7 +151,7 @@ export const loginLimiter = rateLimit({
     message: 'Please try again after 15 minutes'
   },
   store: redisClient ? new RedisStore({
-    client: redisClient,
+    sendCommand: (...args: string[]) => redisClient!.sendCommand(args),
     prefix: 'rl:login:'
   }) : undefined,
   handler: (req, res) => {

@@ -27,7 +27,7 @@ export const handleValidationErrors = (
     });
   }
   
-  next();
+  return next();
 };
 
 // Wallet validation
@@ -178,7 +178,7 @@ export const validateUserId = [
 // Sanitize input to prevent XSS
 export const sanitizeInput = (
   req: Request,
-  res: Response,
+  // res: Response,
   next: NextFunction
 ) => {
   const sanitize = (obj: any): any => {
@@ -202,5 +202,5 @@ export const sanitizeInput = (
   req.query = sanitize(req.query);
   req.params = sanitize(req.params);
   
-  next();
+  return next();
 };

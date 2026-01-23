@@ -69,6 +69,8 @@ export class TransferService {
     if (txResult.rows.length === 0) {
       throw new Error('Transaction not found');
     }
+
+    console.log(`Chain == ${chain}`);
     
     const tx = txResult.rows[0];
     const adapter = ChainAdapterFactory.getAdapter(tx.chain);
