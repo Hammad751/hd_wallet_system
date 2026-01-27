@@ -36,6 +36,16 @@ export class WalletService {
       walletId = walletResult.rows[0].id;
     }
 
+    const wallet_exists = await query(
+      'SELECT id FROM addresses WHERE wallet_id = $1 AND chain = $2',
+      [walletId, config.chains[0].chain]
+    );
+
+    console.log("wallet_exists: ", wallet_exists);
+    if (wallet_exists.rows.length > 0) {
+      // throw new Error(`Wallet already exists for the ${config.chains[0].chain} chain`);
+      return false as any;
+    }
     // Generate addresses for each chain
     const addresses = [];
     for (const chainConfig of config.chains) {
@@ -43,6 +53,7 @@ export class WalletService {
       const network = typeof chainConfig === 'object' ? chainConfig.network : 'ethereum';
 
       console.log("chain or network: ", chain, network);
+      // console.log("");
 
       const address = await this.generateAddressForChain(
         walletId,
