@@ -7,7 +7,10 @@ export enum ChainType {
 
 export interface WalletConfig {
   userId: string;
-  chains: ChainType[];
+  chains: Array<{
+    chain: ChainType;
+    network?: string;  // ethereum, bsc, polygon
+  }>
 }
 
 export interface GeneratedWallet {

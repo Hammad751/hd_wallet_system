@@ -15,6 +15,7 @@ export class ChainAdapterFactory {
   
   static getAdapter(chain: ChainType, network?: string): IChainAdapter {
     const key = network ? `${chain}_${network}` : chain;
+    console.log("adapter key network", key, network, chain);
     
     if (!this.adapters.has(key)) {
       // Initialize default adapters
@@ -41,6 +42,8 @@ export class ChainAdapterFactory {
     }
     
     const adapter = this.adapters.get(key);
+    console.log("adapter key", adapter);
+    
     if (!adapter) {
       throw new Error(`Adapter not found for ${key}`);
     }

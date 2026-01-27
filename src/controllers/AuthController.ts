@@ -3,7 +3,8 @@ import bcrypt from 'bcrypt';
 import { query } from '../config/database';
 import { AuthRequest, generateToken } from '../middleware/auth.middleware';
 import { logger } from '../utils/logger';
-import { ValidationError, AuthenticationError, ConflictError } from '../middleware/error.middleware';
+// import { ValidationError, AuthenticationError, ConflictError } from '../middleware/error.middleware';
+import { AuthenticationError, ConflictError } from '../middleware/error.middleware';
 
 export class AuthController {
   async register(req: AuthRequest, res: Response) {
@@ -110,12 +111,12 @@ export class AuthController {
           ip: req.ip
         });
         
-        // Log failed attempt
-        await query(
-          `INSERT INTO login_attempts (user_id, success, ip_address)
-           VALUES ($1, $2, $3)`,
-          [user.id, false, req.ip]
-        );
+        // // Log failed attempt
+        // await query(
+        //   `INSERT INTO login_attempts (user_id, success, ip_address)
+        //    VALUES ($1, $2, $3)`,
+        //   [user.id, false, req.ip]
+        // );
         
         throw new AuthenticationError('Invalid credentials');
       }
@@ -127,12 +128,12 @@ export class AuthController {
         role: user.role
       });
       
-      // Log successful login
-      await query(
-        `INSERT INTO login_attempts (user_id, success, ip_address)
-         VALUES ($1, $2, $3)`,
-        [user.id, true, req.ip]
-      );
+      // // Log successful login
+      // await query(
+      //   `INSERT INTO login_attempts (user_id, success, ip_address)
+      //    VALUES ($1, $2, $3)`,
+      //   [user.id, true, req.ip]
+      // );
       
       // Update last login
       await query(

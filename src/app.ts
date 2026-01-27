@@ -1,12 +1,8 @@
-// ============================================================================
-// FILE: src/app.ts (UPDATED WITH USER ROUTES)
-// ============================================================================
-
 import express from 'express';
 import cors from 'cors';
-import morgan from 'morgan';
+// import morgan from 'morgan';
 import { config } from './config/environment';
-import { stream } from './utils/logger';
+// import { stream } from './utils/logger';
 import { query, closePool } from './config/database';
 
 // Import middleware
@@ -27,11 +23,27 @@ import {
 } from './middleware';
 
 // Import routes
-// import authRoutes from './routes/auth.routes';
+import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';        // NEW
 import walletRoutes from './routes/wallet.routes';
 import transferRoutes from './routes/transfer.routes';
 // import adminRoutes from './routes/admin.routes';
+
+//////////////////////// Adapters /////////////////////////
+import { ChainAdapterFactory } from './chains';
+import { EVMAdapter } from './chains/evm/EVMAdapter';
+import { BitcoinAdapter } from './chains/bitcoin/BitcoinAdapter';
+import { SolanaAdapter } from './chains/solana/SolanaAdapter';
+// import { TONAdapter } from './chains/ton/TONAdapter';
+
+// Initialize chain adapters BEFORE routes
+ChainAdapterFactory.registerAdapter('EVM', new EVMAdapter(config.rpc.ethereum, 1));
+ChainAdapterFactory.registerAdapter('EVM', new EVMAdapter(config.rpc.bsc, 56));
+ChainAdapterFactory.registerAdapter('EVM', new EVMAdapter(config.rpc.polygon, 137));
+ChainAdapterFactory.registerAdapter('BITCOIN', new BitcoinAdapter('mainnet'));
+ChainAdapterFactory.registerAdapter('SOLANA', new SolanaAdapter(config.rpc.solana));
+// ChainAdapterFactory.registerAdapter('TON', new TONAdapter(config.rpc.ton));
+
 
 const app = express();
 
@@ -68,7 +80,7 @@ app.use(validateContentType);
 app.use(preventParameterPollution);
 
 // 10. HTTP request logging
-app.use(morgan('combined', { stream }));
+// app.use(morgan('combined', { stream }));
 
 // 11. Custom request logger
 app.use(requestLogger);
@@ -124,7 +136,7 @@ app.get('/api/v1', (_, res: express.Response) => {
 });
 
 // Authentication routes (no auth required)
-// app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/auth', authRoutes);
 
 // User management routes (auth required)
 app.use('/api/v1/users', userRoutes);

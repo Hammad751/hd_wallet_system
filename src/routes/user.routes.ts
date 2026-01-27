@@ -1,7 +1,3 @@
-// ============================================================================
-// FILE: src/routes/user.routes.ts
-// ============================================================================
-
 import { Router } from 'express';
 import { body, param, query } from 'express-validator';
 import { UserController } from '../controllers/UserController';
@@ -17,20 +13,6 @@ import {
 const router = Router();
 const controller = new UserController();
 
-// ============================================================================
-// PUBLIC ROUTES (No authentication required)
-// ============================================================================
-
-// None - all user routes require authentication
-
-// ============================================================================
-// USER ROUTES (Authentication required)
-// ============================================================================
-
-/**
- * Get current user profile
- * GET /api/v1/users/me
- */
 router.get(
   '/me',
   authenticate,
@@ -200,10 +182,6 @@ router.get(
   asyncHandler(controller.getAllUsers)
 );
 
-/**
- * Update user status (activate/deactivate)
- * PATCH /api/v1/users/:userId/status
- */
 router.patch(
   '/:userId/status',
   authenticate,
@@ -220,10 +198,6 @@ router.patch(
   asyncHandler(controller.updateUserStatus)
 );
 
-/**
- * Update user role
- * PATCH /api/v1/users/:userId/role
- */
 router.patch(
   '/:userId/role',
   authenticate,
@@ -240,10 +214,6 @@ router.patch(
   asyncHandler(controller.updateUserRole)
 );
 
-/**
- * Delete user permanently
- * DELETE /api/v1/users/:userId
- */
 router.delete(
   '/:userId',
   authenticate,

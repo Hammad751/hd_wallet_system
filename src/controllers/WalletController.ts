@@ -12,17 +12,22 @@ export class WalletController {
   createWallet = async (req: Request, res: Response) => {
     try {
       const { userId, chains } = req.body;
+      console.log("chian", userId, chains);
       
       if (!userId || !chains || !Array.isArray(chains)) {
         return res.status(400).json({ 
           error: 'userId and chains array required' 
         });
       }
+      console.log("chian =2 ", userId, chains);
       
       const wallet = await this.walletService.createWallet({
         userId,
-        chains: chains as ChainType[]
+        chains: chains.map((chain: ChainType | { chain: ChainType; network?: string }) => 
+          typeof chain === 'string' ? { chain } : chain
+        ),
       });
+      console.log("chians created ");
       
       return res.status(201).json({
         success: true,
