@@ -1,6 +1,10 @@
 import { Request, Response } from 'express';
 import { WalletService } from '../services/WalletService';
 import { ChainType } from '../types';
+import { ChainAdapterFactory } from '../chains';
+import { AuthRequest } from '../middleware/auth.middleware';
+import { ValidationError, AuthorizationError, NotFoundError } from '../middleware/error.middleware';
+import { query } from '../config/database';
 
 export class WalletController {
   private walletService: WalletService;
@@ -108,4 +112,69 @@ export class WalletController {
       });
     }
   }
+
+  async getBalance(req: AuthRequest, res: Response) {
+    try {
+      const { address } = req.params;
+      const { chain, token } = req.query;
+
+      if (!chain) {
+        throw new ValidationError('invalid params');
+      }
+
+      // Verify user owns this address
+      const addressCheck = await query(
+        `SELECT a.*, w.user_id 
+       FROM addresses a
+       JOIN wallets w ON a.wallet_id = w.id
+       WHERE a.address = $1`,
+        [address]
+      );
+
+      if (addressCheck.rows.length === 0) {
+        throw new NotFoundError('Address not found');
+      }
+
+      
+      const dbOwnerId = String(addressCheck.rows[0].user_id).toLowerCase().trim();
+      const tokenUserId = String(req.user?.id).toLowerCase().trim();
+
+      // console.log("-----------------------------------------");
+      // console.log("WALLET OWNER IN DB:", dbOwnerId);
+      // console.log("LOGGED-IN USER ID:", tokenUserId);
+      // console.log("-----------------------------------------");
+
+      if (dbOwnerId !== tokenUserId) {
+        throw new AuthorizationError(`Not your address! DB Owner is ${dbOwnerId}`);
+      }
+
+      // if (addressCheck.rows[0].user_id !== req.user?.id && req.user?.role !== 'admin') {
+      //   throw new AuthorizationError('Not your address');
+      // }
+      const network = addressCheck.rows[0].network;
+
+      const adapter = ChainAdapterFactory.getAdapter(chain as ChainType, network);
+      const balance = await adapter.getBalance(address, token as string);
+
+      console.log("adapter & balacne: ", adapter, balance);
+      
+      return res.json({
+        success: true,
+        data: {
+          address,
+          chain,
+          token: token || 'native',
+          balance
+        }
+      });
+    } catch (error: any) {
+      throw error;
+    }
+  }
+
+
+  // query = async (arg0: string, arg1: string[]) => {
+  //   throw new Error('Function not implemented.');
+  // }
+
 }

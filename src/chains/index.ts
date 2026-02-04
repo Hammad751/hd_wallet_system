@@ -27,6 +27,8 @@ export class ChainAdapterFactory {
             this.adapters.set(key, new EVMAdapter(config.rpc.bsc, 56));
           } else if (network === 'polygon') {
             this.adapters.set(key, new EVMAdapter(config.rpc.polygon, 137));
+          }else if (network === 'sepolia') {
+            this.adapters.set(key, new EVMAdapter(config.rpc.sepolia, 11155111));
           }
           break;
         case ChainType.BITCOIN:

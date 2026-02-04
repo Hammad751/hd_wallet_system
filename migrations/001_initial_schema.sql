@@ -1,12 +1,14 @@
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
--- Users table
+-- Users table (Updated with is_active and last_login)
 CREATE TABLE users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     email VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,           -- Required for controller $2
-    name VARCHAR(255),                        -- Required for controller $3
-    role VARCHAR(50) DEFAULT 'user',          -- Required for controller $4
+    password VARCHAR(255) NOT NULL,
+    name VARCHAR(255),
+    role VARCHAR(50) DEFAULT 'user',
+    is_active BOOLEAN DEFAULT true,           -- ADDED
+    last_login TIMESTAMP WITH TIME ZONE,      -- ADDED
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -36,21 +38,24 @@ CREATE TABLE addresses (
     UNIQUE(wallet_id, chain, address_index)
 );
 
--- Transactions table
+-- Transactions table (Updated with network and failed_at)
 CREATE TABLE transactions (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id),         -- RECOMMENDED: Link to user
     from_address VARCHAR(255) NOT NULL,
     to_address VARCHAR(255) NOT NULL,
     chain VARCHAR(50) NOT NULL,
+    network VARCHAR(50) NOT NULL,              -- ADDED: Critical for status checks
     token VARCHAR(100),
     amount DECIMAL(36, 18) NOT NULL,
     tx_hash VARCHAR(255) UNIQUE,
-    status VARCHAR(50) NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    confirmed_at TIMESTAMP
+    confirmed_at TIMESTAMP,
+    failed_at TIMESTAMP                        -- ADDED
 );
 
--- Hot wallets table
+-- Hot wallets table (For centralized liquidity)
 CREATE TABLE hot_wallets (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     chain VARCHAR(50) NOT NULL,
@@ -60,9 +65,9 @@ CREATE TABLE hot_wallets (
     UNIQUE(chain, address)
 );
 
--- Indexes
+-- Indexes (Keep your existing ones, they are great)
 CREATE INDEX idx_addresses_wallet_chain ON addresses(wallet_id, chain);
 CREATE INDEX idx_addresses_address ON addresses(address);
 CREATE INDEX idx_transactions_from ON transactions(from_address);
-CREATE INDEX idx_transactions_to ON transactions(to_address);
 CREATE INDEX idx_transactions_status ON transactions(status);
+CREATE INDEX idx_transactions_user_id ON transactions(user_id); -- ADDED

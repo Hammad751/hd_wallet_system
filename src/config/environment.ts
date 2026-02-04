@@ -25,6 +25,7 @@ export const config = {
   
   rpc: {
     ethereum: process.env.ETHEREUM_RPC || '',
+    sepolia: process.env.RPC_SEPOLIA || '',
     bsc: process.env.BSC_RPC || '',
     polygon: process.env.POLYGON_RPC || '',
     bitcoin: process.env.BITCOIN_RPC || '',

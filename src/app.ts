@@ -37,9 +37,10 @@ import { SolanaAdapter } from './chains/solana/SolanaAdapter';
 // import { TONAdapter } from './chains/ton/TONAdapter';
 
 // Initialize chain adapters BEFORE routes
-ChainAdapterFactory.registerAdapter('EVM', new EVMAdapter(config.rpc.ethereum, 1));
-ChainAdapterFactory.registerAdapter('EVM', new EVMAdapter(config.rpc.bsc, 56));
-ChainAdapterFactory.registerAdapter('EVM', new EVMAdapter(config.rpc.polygon, 137));
+ChainAdapterFactory.registerAdapter('EVM_ethereum', new EVMAdapter(config.rpc.ethereum, 1));
+ChainAdapterFactory.registerAdapter('EVM_sepolia', new EVMAdapter(config.rpc.sepolia, 11155111));
+ChainAdapterFactory.registerAdapter('EVM_bsc', new EVMAdapter(config.rpc.bsc, 56));
+ChainAdapterFactory.registerAdapter('EVM_polygon', new EVMAdapter(config.rpc.polygon, 137));
 ChainAdapterFactory.registerAdapter('BITCOIN', new BitcoinAdapter('mainnet'));
 ChainAdapterFactory.registerAdapter('SOLANA', new SolanaAdapter(config.rpc.solana));
 // ChainAdapterFactory.registerAdapter('TON', new TONAdapter(config.rpc.ton));

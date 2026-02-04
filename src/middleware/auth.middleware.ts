@@ -46,7 +46,8 @@ export const authenticate = async (
     }
     
     try {
-      const decoded = jwt.verify(token, config.jwt.secret) as AuthRequest['user'];
+      // const decoded = jwt.verify(token, config.jwt.secret) as AuthRequest['user'];
+      const decoded = jwt.verify(token, config.jwt.secret) as any;
       
       if (!decoded) {
         return res.status(401).json({ 
@@ -55,7 +56,14 @@ export const authenticate = async (
         });
       }
       
-      req.user = decoded;
+      // req.user = decoded;
+      req.user = {
+        id: decoded.id,
+        email: decoded.email,
+        role: decoded.role
+      };
+      
+      console.log("req.user.id:", req.user.id);
       
       logger.info('User authenticated', {
         userId: decoded.id,
