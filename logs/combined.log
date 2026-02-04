@@ -290,3 +290,51 @@
 {"ip":"::1","level":"info","message":"User authenticated","role":"user","service":"hd-wallet-api","timestamp":"2026-02-03 18:47:35","userId":"7ec32af9-311b-41ab-8fc7-361af2431259"}
 {"ip":"::1","level":"info","message":"Incoming request","method":"GET","path":"/api/v1/wallet/balance/0x7268d53b3d8A34FAA3E1744eaD916Ee1Cc5D1Cc5","requestId":"4e73227a3831b65e4f14416d77488cbf","service":"hd-wallet-api","timestamp":"2026-02-03 18:53:21","userAgent":"PostmanRuntime/7.51.1"}
 {"ip":"::1","level":"info","message":"User authenticated","role":"user","service":"hd-wallet-api","timestamp":"2026-02-03 18:53:21","userId":"7ec32af9-311b-41ab-8fc7-361af2431259"}
+{"level":"info","message":"Starting scheduled auto-flush for EVM","service":"hd-wallet-api","timestamp":"2026-02-04 10:45:45"}
+{"level":"info","message":"Starting scheduled auto-flush for SOLANA","service":"hd-wallet-api","timestamp":"2026-02-04 10:45:45"}
+{"level":"warn","message":"Auto-flush skipped: No active hot wallet for EVM","service":"hd-wallet-api","timestamp":"2026-02-04 10:45:45"}
+{"level":"info","message":"Next auto-flush for EVM scheduled in 60 mins","service":"hd-wallet-api","timestamp":"2026-02-04 10:45:45"}
+{"level":"warn","message":"Auto-flush skipped: No active hot wallet for SOLANA","service":"hd-wallet-api","timestamp":"2026-02-04 10:45:45"}
+{"level":"info","message":"Next auto-flush for SOLANA scheduled in 30 mins","service":"hd-wallet-api","timestamp":"2026-02-04 10:45:45"}
+{"level":"info","message":"Starting scheduled auto-flush for EVM","service":"hd-wallet-api","timestamp":"2026-02-04 10:47:32"}
+{"level":"info","message":"Starting scheduled auto-flush for SOLANA","service":"hd-wallet-api","timestamp":"2026-02-04 10:47:32"}
+{"level":"warn","message":"Auto-flush skipped: No active hot wallet for EVM","service":"hd-wallet-api","timestamp":"2026-02-04 10:47:32"}
+{"level":"info","message":"Next auto-flush for EVM scheduled in 60 mins","service":"hd-wallet-api","timestamp":"2026-02-04 10:47:32"}
+{"level":"warn","message":"Auto-flush skipped: No active hot wallet for SOLANA","service":"hd-wallet-api","timestamp":"2026-02-04 10:47:32"}
+{"level":"info","message":"Next auto-flush for SOLANA scheduled in 30 mins","service":"hd-wallet-api","timestamp":"2026-02-04 10:47:32"}
+{"level":"info","message":"--- Triggering Scheduled Flush for EVM ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:27"}
+{"level":"info","message":"--- Triggering Scheduled Flush for SOLANA ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:27"}
+{"level":"warn","message":"Auto-flush aborted: No active hot wallet for EVM","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:27"}
+{"level":"info","message":"--- Scheduled Flush Finished. Next run in 60m ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:27"}
+{"level":"warn","message":"Auto-flush aborted: No active hot wallet for SOLANA","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:28"}
+{"level":"info","message":"--- Scheduled Flush Finished. Next run in 30m ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:28"}
+{"level":"info","message":"--- Triggering Scheduled Flush for EVM ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:34"}
+{"level":"info","message":"--- Triggering Scheduled Flush for SOLANA ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:34"}
+{"level":"warn","message":"Auto-flush aborted: No active hot wallet for EVM","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:34"}
+{"level":"info","message":"--- Scheduled Flush Finished. Next run in 60m ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:34"}
+{"level":"warn","message":"Auto-flush aborted: No active hot wallet for SOLANA","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:34"}
+{"level":"info","message":"--- Scheduled Flush Finished. Next run in 30m ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:34"}
+{"level":"info","message":"--- Triggering Scheduled Flush for EVM ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:41"}
+{"level":"info","message":"--- Triggering Scheduled Flush for SOLANA ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:41"}
+{"level":"warn","message":"Auto-flush aborted: No active hot wallet for EVM","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:41"}
+{"level":"info","message":"--- Scheduled Flush Finished. Next run in 60m ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:41"}
+{"level":"warn","message":"Auto-flush aborted: No active hot wallet for SOLANA","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:41"}
+{"level":"info","message":"--- Scheduled Flush Finished. Next run in 30m ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:41"}
+{"level":"info","message":"--- Triggering Scheduled Flush for EVM ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:48"}
+{"level":"info","message":"--- Triggering Scheduled Flush for SOLANA ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:48"}
+{"level":"warn","message":"Auto-flush aborted: No active hot wallet for EVM","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:48"}
+{"level":"info","message":"--- Scheduled Flush Finished. Next run in 60m ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:48"}
+{"level":"warn","message":"Auto-flush aborted: No active hot wallet for SOLANA","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:48"}
+{"level":"info","message":"--- Scheduled Flush Finished. Next run in 30m ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:48"}
+{"level":"info","message":"--- Triggering Scheduled Flush for EVM ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:56"}
+{"level":"info","message":"--- Triggering Scheduled Flush for SOLANA ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:56"}
+{"level":"warn","message":"Auto-flush aborted: No active hot wallet for EVM","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:56"}
+{"level":"info","message":"--- Scheduled Flush Finished. Next run in 60m ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:56"}
+{"level":"warn","message":"Auto-flush aborted: No active hot wallet for SOLANA","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:56"}
+{"level":"info","message":"--- Scheduled Flush Finished. Next run in 30m ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:50:56"}
+{"level":"info","message":"--- Triggering Scheduled Flush for EVM ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:51:19"}
+{"level":"info","message":"--- Triggering Scheduled Flush for SOLANA ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:51:19"}
+{"level":"warn","message":"Auto-flush aborted: No active hot wallet for EVM","service":"hd-wallet-api","timestamp":"2026-02-04 10:51:19"}
+{"level":"info","message":"--- Scheduled Flush Finished. Next run in 60m ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:51:19"}
+{"level":"warn","message":"Auto-flush aborted: No active hot wallet for SOLANA","service":"hd-wallet-api","timestamp":"2026-02-04 10:51:19"}
+{"level":"info","message":"--- Scheduled Flush Finished. Next run in 30m ---","service":"hd-wallet-api","timestamp":"2026-02-04 10:51:19"}

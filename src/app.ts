@@ -4,6 +4,7 @@ import cors from 'cors';
 import { config } from './config/environment';
 // import { stream } from './utils/logger';
 import { query, closePool } from './config/database';
+import { ChainType } from './types';
 
 // Import middleware
 import {
@@ -34,6 +35,7 @@ import { ChainAdapterFactory } from './chains';
 import { EVMAdapter } from './chains/evm/EVMAdapter';
 import { BitcoinAdapter } from './chains/bitcoin/BitcoinAdapter';
 import { SolanaAdapter } from './chains/solana/SolanaAdapter';
+import { FlushService } from './services/FlushService';
 // import { TONAdapter } from './chains/ton/TONAdapter';
 
 // Initialize chain adapters BEFORE routes
@@ -173,6 +175,13 @@ const server = async () => {
     console.log('⏳ Connecting to PostgreSQL...');
     const result = await query('SELECT NOW() as now');
     console.log(`✅ Database Connected: ${result.rows[0].now}`);
+
+    const flushService = new FlushService();
+
+    // Start background workers for different chains
+    flushService.scheduleAutoFlush(ChainType.EVM, 60);     // Every hour
+    flushService.scheduleAutoFlush(ChainType.SOLANA, 30);  // Every 30 mins
+
 
     // 2. Start Express Server
     const PORT = config.port;
