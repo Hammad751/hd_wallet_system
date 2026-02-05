@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Environment Files (VERY IMPORTANT for crypto)
+**/.env
+**/.env.local
+
+# Build outputs
+dist/
+build/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
